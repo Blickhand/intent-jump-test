@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Intent 测试页 v2 ★</title>
+<style>
+body{font-family:sans-serif;max-width:640px;margin:24px auto;padding:0 16px;background:#f7f7fa}
+a.btn{display:block;margin:14px 0;padding:16px;text-align:center;border-radius:12px;
+background:#4a6cf7;color:#fff;text-decoration:none;font-size:17px}
+a.btn.huawei{background:#c53030}
+a.btn.app{background:#2f855a}
+a.btn.misc{background:#718096}
+h2{font-size:18px}small{color:#666}
+#log{background:#fff;border:1px solid #ddd;border-radius:8px;padding:10px;font-size:13px;white-space:pre-wrap;font-family:monospace}
+</style>
+</head>
+<body>
+<h1>Intent 跳转测试页 v2</h1>
+<p>第一版5个全没反应 → 已加入华为生态协议+应用类控制组。请按顺序点击，<b>重点看 ⑥⑦⑧</b>~</p>
+
+<h2>⑥ 华为生态 scheme（hwtips 是华为自家App的公开协议）</h2>
+<a class="btn huawei" href="hwtips://com.huawei.hmos.tips.app">⑥a hwtips:// 玩机技巧</a>
+<a class="btn huawei" href="hiapplink://com.huawei.appmarket?appId=C100170981&channelId=HwBrowserSearch&referrer=Keywords">⑥b hiapplink:// 应用市场详情</a>
+<a class="btn huawei" href="appmarket://details?id=com.huawei.browser">⑥c appmarket:// 应用市场(华为浏览器)</a>
+
+<h2>⑦ 常见大厂 App scheme（检查浏览器是否只放行白名单）</h2>
+<a class="btn app" href="mqq://">⑦a mqq:// QQ</a>
+<a class="btn app" href="weixin://">⑦b weixin:// 微信</a>
+<a class="btn app" href="snssdk1128://">⑦c snssdk1128:// 抖音</a>
+<a class="btn app" href="tbopen://">⑦d tbopen:// 淘宝</a>
+
+<h2>⑧ 其他系统入口尝试</h2>
+<a class="btn misc" href="intent://#Intent;action=android.settings.SETTINGS;category=android.intent.category.LAUNCHER;end">⑧a intent + LAUNCHER category</a>
+<a class="btn misc" href="intent://#Intent;action=android.settings.APPLICATION_DETAILS_SETTINGS;data=package%3Acom.android.settings;S.browser_fallback_url=https%3A%2F%2Fblickhand.github.io%2Fintent-jump-test%2F;end">⑧b intent 带fallback → 设置详情</a>
+<a class="btn misc" href="settings://">⑧c settings:// 直跳</a>
+<a class="btn misc" href="android-app://com.android.settings/">⑧d android-app:// 直接作链接</a>
+<a class="btn misc" href="hwsettings://">⑧e hwsettings:// 猜测华为协议</a>
+
+<h2>结果记录</h2>
+<div id="log">（点击按钮会记录到这里）</div>
+
+<script>
+document.querySelectorAll('a.btn').forEach(a=>{
+  a.addEventListener('click',()=>log('点击: '+a.textContent+' @ '+new Date().toLocaleTimeString()));
+});
+function log(s){document.getElementById('log').textContent+='\n'+s}
+log('v2 页面已加载');
+</script>
+</body>
+</html>
